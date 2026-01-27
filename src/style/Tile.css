@@ -1,0 +1,10 @@
+.tile {
+    background-color: #fff;
+    border: 0.15vw solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    width: 15vh;    /*keep square tiles*/
+    font-size: 5vh;
+}
