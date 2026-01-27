@@ -8,3 +8,12 @@
     width: 15vh;    /*keep square tiles*/
     font-size: 5vh;
 }
+
+.tile-button {
+    background-color: #fff;
+    border: none;
+    font-size: 5vh;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
