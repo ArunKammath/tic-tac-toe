@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import './App.css'
 import Tile from './components/Tile.jsx'
+
 function validateBoard(board, rowIndex, cellIndex) {
   let i=rowIndex, j=cellIndex;
   let char=board[i][j];
@@ -46,6 +47,13 @@ function App() {
     }
   }
   
+  const HandlePlayAgain = () => {
+    boardRef.current.board.forEach(row => row.fill(''));
+    console.log(boardRef.current.board);
+    setGameWon(false);
+    setSymbol('X');
+  }
+
   return(
     <div className='layout'>
       <h1>Tic Tac Toe</h1>
@@ -57,7 +65,11 @@ function App() {
           ))
         ))}
       </div>
-      {gameWon &&<div className='winner'><h1>Game Won by {symbol}</h1></div>}
+      {gameWon &&
+      <div className='winner'>
+        <h1>Game Won by {symbol}</h1>
+        <button onClick={HandlePlayAgain}> Play Again</button>
+      </div>}
     </div>
   );
 }
