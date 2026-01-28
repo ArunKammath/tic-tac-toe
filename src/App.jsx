@@ -28,7 +28,19 @@ function validateBoard(board, rowIndex, cellIndex) {
       if(k===2) gameWon=true;
     }
   }
-  console.log(gameWon);
+  if(!gameWon){
+    let gameTied=true;
+    for(let i=0; i<3; i++){
+      for(let j=0; j<3; j++){
+        if(board[i][j] === '') {
+          gameTied=false;
+          break;
+        }
+      }
+      if(!gameTied) break;
+    }
+    if(gameTied) gameWon=undefined; //undefined means game is tied
+  }
   return gameWon;
 }
 
@@ -41,15 +53,14 @@ function App() {
     if(boardRef.current.board[rowIndex][cellIndex] !== '') return;
 
     boardRef.current.board[rowIndex][cellIndex] = symbol;
-    if(validateBoard(boardRef.current.board, rowIndex, cellIndex)) setGameWon(true);
-    else{
-      setSymbol(symbol === 'X' ? 'O' : 'X');
-    }
+    const result = validateBoard(boardRef.current.board, rowIndex, cellIndex);
+    if (result === true) setGameWon(true);
+    else if (result === undefined) setGameWon(undefined);
+    else setSymbol(symbol === 'X' ? 'O' : 'X');
   }
   
   const HandlePlayAgain = () => {
     boardRef.current.board.forEach(row => row.fill(''));
-    console.log(boardRef.current.board);
     setGameWon(false);
     setSymbol('X');
   }
@@ -65,9 +76,14 @@ function App() {
           ))
         ))}
       </div>
-      {gameWon &&
+      {gameWon === true &&
       <div className='winner'>
         <h1>Game Won by {symbol}</h1>
+        <button onClick={HandlePlayAgain}> Play Again</button>
+      </div>}
+      {gameWon === undefined &&
+      <div className='winner'>
+        <h1>Game Tied</h1>
         <button onClick={HandlePlayAgain}> Play Again</button>
       </div>}
     </div>
