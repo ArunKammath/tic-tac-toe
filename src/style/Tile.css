@@ -1,19 +1,58 @@
 .tile {
-    background-color: #fff;
-    border: 0.15vw solid #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 15vh;
-    width: 15vh;    /*keep square tiles*/
-    font-size: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: var(--cell-bg);
+  border: 2px solid var(--cell-border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.tile:hover {
+  background: var(--cell-hover);
+  border-color: #c9c3b9;
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-1px);
+}
+
+.tile:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow);
 }
 
 .tile-button {
-    background-color: #fff;
-    border: none;
-    font-size: 5vh;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: clamp(2rem, 8vmin, 3.5rem);
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--ink);
+  transition: color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tile-button:focus {
+  outline: none;
+}
+
+.tile-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tile-button.tile-x {
+  color: var(--x-color);
+}
+
+.tile-button.tile-o {
+  color: var(--o-color);
 }
